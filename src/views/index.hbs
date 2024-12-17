@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delicious Indian Cuisine</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    .header-bg {
+      background-image: url('images/indian-food-banner.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #000000;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      background-color: #333;
+      padding: 10px 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+    .container {
+      padding: 20px;
+    }
+    .contact-btn {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .contact-btn:hover {
+      background-color: #333;
+      transform: scale(1.1);
+    }
+    .slider {
+      width: 100%;
+      max-width: 1200px; /* Adjust as per your design */
+      max-height: 400px; /* Set a maximum height */
+      overflow: hidden;
+      margin: 0 auto; /* Center align */
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .slides {
+      display: flex;
+      width: 300%; /* Adjust based on number of slides */
+      transition: transform 0.5s ease-in-out; /* Smooth transition */
+    }
+    .slide {
+      width: 100%;
+      flex: 1 0 100%; /* Ensures each slide takes up full width */
+      max-height: 400px; /* Ensures all slides have the same maximum height */
+      display: none; /* Hide all slides initially */
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Maintain aspect ratio and cover container */
+      vertical-align: top; /* Fix alignment issue */
+    }
+    .slide-caption {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+    .timer {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+    .blog {
+      margin-top: 20px;
+    }
+    .blog-heading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .blog-posts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .blog-post {
+      flex: 1;
+      min-width: 300px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .blog-post img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover; /* Ensure images don't stretch */
+      vertical-align: top; /* Fix alignment issue */
+    }
+    .contact-form {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .contact-form h2 {
+      margin-top: 0;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .contact-form button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .contact-form button:hover {
+      background-color: #333;
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: #fff;
+      margin-top: 20px;
+      position: relative;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-content div {
+      flex: 1;
+      padding: 10px;
+    }
+    .footer-content .social-media {
+      text-align: right;
+    }
+    .footer-content .social-media img {
+      width: 30px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .header-bg {
+        padding: 40px 10px;
+      }
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .slides {
+        width: 100%; /* Adjust for smaller screens */
+      }
+      .blog-posts {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .blog-post {
+        flex: 1 1 100%; /* Each post takes full width */
+        margin-bottom: 20px;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-content .social-media {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body onload="slideShow()">
+  <header class="header-bg">
+    <h1>Delicious Indian Cuisine</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <div class="container" id="home">
+    <section class="slider">
+      <div class="slides">
+        <div class="slide" style="display: block;">
+          <img src="https://vegnews.com/media/W1siZiIsIjQwODE0L1ZlZ05ld3MuT2tzYW5hS2lpYW4uR2V0dHkuanBnIl0sWyJwIiwiY3JvcF9yZXNpemVkIiwiMTE5MHg2MjQrMCs4NyIsIjEyMDB4NjMwXiIseyJmb3JtYXQiOiJqcGcifV0sWyJwIiwib3B0aW1pemUiXV0/VegNews.OksanaKiian.Getty.jpg?sha=01387f1e8574b5bd" alt="Indian Dish 1">
+          <div class="slide-caption">Slide 1</div>
+        </div>
+        <div class="slide">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXZylLZLdEOnpA7xCFv_tEqFvcThCY70wK7Q&s" alt="Indian Dish 2">
+          <div class="slide-caption">Slide 2</div>
+        </div>
+        <div class="slide">
+          <img src="https://www.eatingwell.com/thmb/m5xUzIOmhWSoXZnY-oZcO9SdArQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/article_291139_the-top-10-healthiest-foods-for-kids_-02-4b745e57928c4786a61b47d8ba920058.jpg" alt="Indian Dish 3">
+          <div class="slide-caption">Slide 3</div>
+        </div>
+      </div>
+      <div class="timer">Next slide in <span id="timer">5</span> seconds</div>
+    </section>
+
+    <section class="blog" id="blog">
+      <h2 class="blog-heading">Our Blog</h2>
+      <div class="blog-posts">
+        <div class="blog-post">
+          <img src="https://uploads-ssl.webflow.com/5fe0022130b6119c3b25d03f/6000a4262c3c62f6aadb85d3_shutterstock_1044844045.jpg" alt="Blog Post 1">
+          <h3>Exploring the Flavors of India</h3>
+          <p>Discover the rich and diverse flavors of Indian cuisine, from spicy curries to sweet desserts.</p>
+        </div>
+        <div class="blog-post">
+          <img src="https://uploads-ssl.webflow.com/5fe0022130b6119c3b25d03f/6000a4262c3c62f6aadb85d3_shutterstock_1044844045.jpg" alt="Blog Post 2">
+          <h3>Traditional Indian Recipes</h3>
+          <p>Learn how to cook authentic Indian dishes with our easy-to-follow recipes.</p>
+        </div>
+        <div class="blog-post">
+          <img src="https://uploads-ssl.webflow.com/5fe0022130b6119c3b25d03f/6000a4262c3c62f6aadb85d3_shutterstock_1044844045.jpg" alt="Blog Post 3">
+          <h3>Health Benefits of Indian Spices</h3>
+          <p>Explore the health benefits of commonly used Indian spices in everyday cooking.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-form" id="contact">
+      <h2>Contact Us</h2>
+      <form action="submit_form.php" method="post">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <p>&copy; 2024 Delicious Indian Cuisine. All rights reserved.</p>
+        <p>1234 Street Name, City, State, 56789</p>
+      </div>
+      <div class="social-media">
+        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Facebook_icon_2013.svg/1024px-Facebook_icon_2013.svg.png" alt="Facebook"></a>
+        <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPjHtt8GM1NaPEQlldWSivw5dkY9KLWiSNxQ&s" alt="Twitter"></a>
+        <a href="#"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Instagram_colored_svg_1-512.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Function to switch slides automatically
+    function slideShow() {
+      const slides = document.querySelectorAll('.slide');
+      let currentSlide = 0;
+      const slideInterval = setInterval(nextSlide, 5000); // Adjust timing as per your preference
+
+      function nextSlide() {
+        slides[currentSlide].style.display = 'none';
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].style.display = 'block';
+        updateTimer();
+      }
+
+      function updateTimer() {
+        let timer = document.getElementById('timer');
+        let timeLeft = 5;
+        const countdown = setInterval(() => {
+          timeLeft--;
+          timer.textContent = timeLeft;
+          if (timeLeft <= 0) clearInterval(countdown);
+        }, 1000);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+      slideShow();
+    });
+  </script>
+</body>
+</html>
+
+
+  <script>
+      if ('geolocation' in navigator) {
+        const options = {
+          enableHighAccuracy: true,
+          timeout: 10000, // Increased timeout for better accuracy
+          maximumAge: 0
+        };
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+const worker = new Worker('/js/worker.js');
+          worker.postMessage({ latitude, longitude });
+        }, function(error) {
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              console.error("User denied the request for Geolocation.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              console.error("Location information is unavailable.");
+              break;
+            case error.TIMEOUT:
+              console.error("The request to get user location timed out.");
+              break;
+            case error.UNKNOWN_ERROR:
+              console.error("An unknown error occurred.");
+              break;
+          }
+        }, options);
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Thank you for your message!');
+    });
+  </script>
+</body>
+</html>
