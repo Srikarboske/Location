@@ -96,8 +96,7 @@ app.post('/location', async (req, res) => {
   }
 });
 
-// Start the server on the specified port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000; // Change 3000 to 4000
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
